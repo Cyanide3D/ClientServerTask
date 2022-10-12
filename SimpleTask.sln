@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTask", "SimpleTask\SimpleTask.csproj", "{428452DE-AFD3-4035-A94B-D5A784AE83AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "SimpleTask\Server.csproj", "{428452DE-AFD3-4035-A94B-D5A784AE83AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{CE331C75-5501-4B39-B5E3-61972C427FCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{CE331C75-5501-4B39-B5E3-61972C427FCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

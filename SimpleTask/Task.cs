@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleTask.task
+namespace Server
 {
     internal class Task
     {
-        public String Three(String input)
+        public string Three(string input)
         {
-            return Math.Abs(Int16.Parse(input)).ToString();
+            return Math.Abs(short.Parse(input)).ToString();
         }
-        public String Six(String input)
+        public string Six(string input)
         {
-            int num = Int16.Parse(input);
+            int num = short.Parse(input);
             return Math.Log(num + 12 / num).ToString();
         }
-        public String Nine(String input)
+        public string Nine(string input)
         {
             StringBuilder builder = new StringBuilder();
             double x, z, Xn = 4.0, Xk = -6.0, dx = 0.91, a = -0.2, b = 0.8;
@@ -25,7 +25,7 @@ namespace SimpleTask.task
             {
                 z = Math.Sin(x) + Math.Cos(x);
 
-                if ((z >= a) && (z <= b))
+                if (z >= a && z <= b)
                 {
                     builder.Append(x).Append(":").Append(z).Append(";");
                 }
@@ -33,7 +33,7 @@ namespace SimpleTask.task
 
             return builder.ToString();
         }
-        public String Twelve(String input)
+        public string Twelve(string input)
         {
             int num = 1;
             double y;
@@ -45,9 +45,9 @@ namespace SimpleTask.task
 
             return y.ToString();
         }
-        public String Fifteen(String input)
+        public string Fifteen(string input)
         {
-            int i = Int16.Parse(input);
+            int i = short.Parse(input);
             return (i * i).ToString();
         }
     }

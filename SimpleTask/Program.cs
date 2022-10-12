@@ -1,5 +1,4 @@
-﻿using SimpleTask.task;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,14 +6,12 @@ using System.Net.Sockets;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using Task = SimpleTask.task.Task;
+using Task = Server.Task;
 
 namespace SimpleTask
 {
     internal class Server
     {
-        const String ip = "127.0.0.1";
-        const int port = 8080;
 
         public static int Main(String[] args)
         {
@@ -31,30 +28,33 @@ namespace SimpleTask
             try
             {
                 Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                listener.Bind(localEndPoint);
-                listener.Listen(10);
+                listener.Bind(localEndPoint); //До этого момента всё так же как и в Sender. Тут же мы присваеваем сокету созданный эндпоинт.
+                listener.Listen(10); //Вешаем сокет на прослушиввание входящих соединений, в скобках указываем сколько клиентом могут одновременно обслуживаться
 
                 Console.WriteLine("Waiting for a connection...");
-                Socket handler = listener.Accept();
-                string data = null;
-                byte[] bytes = null;
-
-                while (true)
+                while (true) //Вечно будем принимать запросы
                 {
-                    bytes = new byte[1024];
-                    int bytesRec = handler.Receive(bytes);
-                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                    if (handler.Available <= 0)
-                    {
-                        break;
-                    }
-                }
+                    Socket handler = listener.Accept(); //Метод Accept блочит поток и ждёт нового подключения, после чего будет выполняться код дальше
+                    string data = null;
+                    byte[] bytes = null;
 
-                var task = new Task();
-                byte[] msg = Encoding.ASCII.GetBytes(task.Three(data));
-                handler.Send(msg);
-                handler.Shutdown(SocketShutdown.Both);
-                handler.Close();
+                    while (true)
+                    {
+                        bytes = new byte[1024];
+                        int bytesRec = handler.Receive(bytes);
+                        data += Encoding.ASCII.GetString(bytes, 0, bytesRec); //Получаем байты и пихаем их в строчку
+                        if (handler.Available <= 0) //Если во входном потоке не осталось байтов то прекращаем считывать
+                        {
+                            break;
+                        }
+                    }
+
+                    var task = new Task();
+                    byte[] msg = Encoding.ASCII.GetBytes(task.Fifteen(data));
+                    handler.Send(msg); //Отправляем ответ клиенту
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
+                }
             }
             catch (Exception e)
             {
