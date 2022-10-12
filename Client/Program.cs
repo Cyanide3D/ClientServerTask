@@ -16,7 +16,7 @@ namespace SimpleTask
         public static void Main(String[] args)
         {
             Task task = new Task();
-            task.Fifteen();
+            task.Fifteen(); //Меняем метод в зависимости от задачи
         }
     }
 }

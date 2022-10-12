@@ -50,7 +50,7 @@ namespace SimpleTask
                     }
 
                     var task = new Task();
-                    byte[] msg = Encoding.ASCII.GetBytes(task.Fifteen(data));
+                    byte[] msg = Encoding.ASCII.GetBytes(task.Fifteen(data)); //Тут меняем метод, когда нужно сменить задачу
                     handler.Send(msg); //Отправляем ответ клиенту
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
